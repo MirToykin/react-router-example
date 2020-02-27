@@ -1,10 +1,15 @@
 import React from 'react';
 import './App.css';
+import UsersContainer from "./components/Users/UsersContainer";
+import Nav from "./components/Nav/Nav";
 
 const App  = () => {
   return (
-    <div>
-      <h1>TEST</h1>
+    <div className='App'>
+      <Nav />
+      <div className='main-content'>
+        <UsersContainer/>
+      </div>
     </div>
   )
 }
