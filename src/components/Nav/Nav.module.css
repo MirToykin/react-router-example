@@ -2,3 +2,15 @@
   width: 20%;
   background-color: chocolate;
 }
+
+.nav_link {
+  display: block;
+  text-decoration: none;
+  color: #fff;
+  height: 2em;
+  line-height: 2em;
+}
+
+.active {
+  background-color: lightslategray;
+}

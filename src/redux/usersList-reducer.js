@@ -1,21 +1,18 @@
-import * as axios from "axios";
+import ajax from "../api/api";
 
 const SET_USERS_SUCCESS = 'SET_USERS_SUCCESS';
 const SET_USERS_FAILURE = 'SET_USERS_FAILURE';
-const SET_CURRENT_USER_SUCCESS = 'SET_CURRENT_USER_SUCCESS';
-const SET_CURRENT_USER_FAILURE = 'SET_CURRENT_USER_FAILURE';
-const FETCHING = 'FETCHING';
+const USERS_LIST_FETCHING = 'USERS_LIST_FETCHING';
 
 let initialState = {
   isFetching: false,
   usersData: [],
-  currentUser: {},
   error: ''
 }
 
-const usersReducer = (state = initialState, action) => {
+const usersListReducer = (state = initialState, action) => {
   switch(action.type) {
-    case FETCHING:
+    case USERS_LIST_FETCHING:
       return {
         ...state,
         isFetching: true,
@@ -32,18 +29,6 @@ const usersReducer = (state = initialState, action) => {
         error: action.err,
         isFetching: false
       }
-    case SET_CURRENT_USER_SUCCESS:
-      return {
-        ...state,
-        currentUser: action.currentUser,
-        isFetching: false
-      }
-    case SET_CURRENT_USER_FAILURE:
-      return {
-        ...state,
-        error: action.err,
-        isFetching: false
-      }
     default:
       return state;
   }
@@ -51,7 +36,7 @@ const usersReducer = (state = initialState, action) => {
 
 const fetching = () => {
   return {
-    type: FETCHING
+    type: USERS_LIST_FETCHING
   }
 }
 
@@ -69,30 +54,16 @@ const setUsersFailure = (err) => {
   }
 }
 
-const setCurrentUserSuccess = (currentUser) => {
-  return {
-    type: SET_CURRENT_USER_SUCCESS,
-    currentUser
-  }
-}
-
-const setCurrentUserFailure = (err) => {
-  return {
-    type: SET_CURRENT_USER_FAILURE,
-    err
-  }
-}
-
 export const getUsers = () => (dispatch) => {
   dispatch(fetching());
-  axios.get('https://jsonplaceholder.typicode.com/users')
+  ajax.get('users')
     .then(response => {
       let users = response.data;
       dispatch(setUsersSuccess(users))
     })
     .catch(err => {
-      dispatch(setUsersFailure(err))
+      dispatch(setUsersFailure(err.message))
     })
 }
 
-export default usersReducer;
+export default usersListReducer;

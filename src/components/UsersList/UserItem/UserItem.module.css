@@ -1,0 +1,7 @@
+.userItem {
+  display: flex;
+  justify-content: space-between;
+  background-color: cadetblue;
+  margin-bottom: 0.5em;
+  padding: 0.5em;
+}
