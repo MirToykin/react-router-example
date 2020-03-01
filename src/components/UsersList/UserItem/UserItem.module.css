@@ -1,7 +1,13 @@
 .userItem {
   display: flex;
   justify-content: space-between;
-  background-color: cadetblue;
-  margin-bottom: 0.5em;
-  padding: 0.5em;
+  background-image: linear-gradient(to top, #c4c5c7 0%, #dcdddf 52%, #ebebeb 100%);
+  margin-bottom: 1em;
+  padding: 0.5em 1.2em;
+  border-radius: 1em;
+  box-shadow: 0 2px 5px #dcdddf;
+}
+
+.userItem a {
+  color: #404040;
 }

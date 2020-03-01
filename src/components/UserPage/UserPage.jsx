@@ -1,28 +1,45 @@
 import React from "react";
 import classes from './UserPage.module.css'
+import UserPost from "./UserPost/UserPost";
 
 const UserPage = props => {
-
-  return <div>Test...</div>
-  // return (
-  //   <div className={classes.userPage}>
-  //     <div className={classes.left}>
-  //       <h3 className={classes.name}>{props.name} ({props.username})</h3>
-  //       <h4 className={classes.contactsTitle}>Contacts</h4>
-  //       <ul>
-  //         <li>Email: {props.email}</li>
-  //         <li>Phone: {props.phone}</li>
-  //         <li>Website: {props.website}</li>
-  //       </ul>
-  //     </div>
-  //     <div className={classes.right}>
-  //       <h4 className={classes.placeOfWorkTitle}>Place of work:</h4>
-  //       <p>Company: {props.company.name}</p>
-  //       <p>Occupation: {props.company.catchPhrase}</p>
-  //       <p>Slogan: {props.company.bs}</p>
-  //     </div>
-  //   </div>
-  // )
+  debugger
+  return (
+    <div className={classes.userPage}>
+      <div className={classes.userPageInfo}>
+        <div className={classes.left}>
+          <h4 className={classes.name}>{props.user.name} ({props.user.username})</h4>
+          <h5 className={classes.contactsTitle}>Contacts:</h5>
+          <ul>
+            <li>Email: {props.user.email}</li>
+            <li>Phone: {props.user.phone}</li>
+            <li>Website: {props.user.website}</li>
+          </ul>
+        </div>
+        <div className={classes.right}>
+          <h5 className={classes.placeOfWorkTitle}>Place of work:</h5>
+          <p>Company: {props.user.company.name}</p>
+          <p>Occupation: {props.user.company.catchPhrase}</p>
+          <p>Slogan: {props.user.company.bs}</p>
+        </div>
+      </div>
+      <hr/>
+      <div className={classes.posts}>
+        <h5 className={classes.postsTitle}>Posts:</h5>
+        {props.usersPosts.map((post, postIndex) => <UserPost
+          key={post.id}
+          id={post.id}
+          title={post.title}
+          body={post.body}
+          showComments={props.showComments}
+          hideComments={props.hideComments}
+          visibleComments={props.visibleComments}
+          usersComments={props.usersComments}
+          postIndex
+        />)}
+      </div>
+    </div>
+  )
 }
 
 export default UserPage

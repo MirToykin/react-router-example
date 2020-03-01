@@ -8,7 +8,8 @@ const SET_USER_SUCCESS = 'SET_USER_SUCCESS';
 const SET_USERS_POSTS_SUCCESS = 'SET_USERS_POSTS_SUCCESS';
 const SET_USERS_COMMENTS_SUCCESS = 'SET_USERS_COMMENTS_SUCCESS';
 const SET_DATA_FAILURE = 'SET_DATA_FAILURE';
-const SET_SAME_USER = 'SET_SAME_USER';
+const ON_COMMENTS_VISIBILITY = 'ON_COMMENTS_VISIBILITY';
+const OFF_COMMENTS_VISIBILITY = 'OFF_COMMENTS_VISIBILITY';
 
 let initialState = {
   user: {},
@@ -16,7 +17,7 @@ let initialState = {
   usersComments: [],
   error: '',
   isFetching: false,
-  isTheSameUser: false
+  visibleComments: []
 }
 
 const userPageReducer = (state = initialState, action) => {
@@ -24,53 +25,47 @@ const userPageReducer = (state = initialState, action) => {
     case USER_PAGE_FETCHING:
       return {
         ...state,
-        isFetching: true
-      }
-    case SET_SAME_USER:
-      return {
-        ...state,
-        isTheSameUser: action.isTheSame
+        isFetching: action.isFething
       }
     case SET_USER_SUCCESS:
       return {
         ...state,
-        user: action.user,
-        isFetching: false
+        user: action.user
       }
     case SET_USERS_POSTS_SUCCESS:
       return {
         ...state,
-        usersPosts: action.posts,
-        isFetching: false
+        usersPosts: action.posts
       }
     case SET_USERS_COMMENTS_SUCCESS:
-      debugger
       return {
         ...state,
-        usersComments: state.isTheSameUser ? [...state.usersComments, action.comments] : [action.comments],
-        isFetching: false
+        usersComments: state.usersComments.length < state.usersPosts.length ? [...state.usersComments, action.comments] : [action.comments]
       }
     case SET_DATA_FAILURE:
       return {
         ...state,
-        error: action.err,
-        isFetching: false
+        error: action.err
+      }
+    case ON_COMMENTS_VISIBILITY:
+      return {
+        ...state,
+        visibleComments: [...state.visibleComments, action.postId]
+      }
+    case OFF_COMMENTS_VISIBILITY:
+      return {
+        ...state,
+        visibleComments: state.visibleComments.filter(id => id !== action.postId)
       }
     default:
       return state
   }
 }
 
-const setFetching = () => {
+const setFetching = (isFething) => {
   return {
-    type: USER_PAGE_FETCHING
-  }
-}
-
-const setSameUser = (isTheSame) => {
-  return {
-    type: SET_SAME_USER,
-    isTheSame
+    type: USER_PAGE_FETCHING,
+    isFething
   }
 }
 
@@ -102,8 +97,22 @@ const setDataFailure = err => {
   }
 }
 
+export const onCommentsVisibility = postId => {
+  return {
+    type: ON_COMMENTS_VISIBILITY,
+    postId
+  }
+}
+
+export const offCommentsVisibility = postId => {
+  return {
+    type: OFF_COMMENTS_VISIBILITY,
+    postId
+  }
+}
+
 export const getUserPageData = (userId) => (dispatch) => {
-  dispatch(setFetching());
+  dispatch(setFetching(true));
   ajax.get('users/' + userId)
     .then(response => {
       let user = response.data;
@@ -118,7 +127,6 @@ export const getUserPageData = (userId) => (dispatch) => {
       }))
     })
     .then(response => {
-      dispatch(setSameUser(true))
       response.forEach((promise => {
         if (promise.status === 'fulfilled') {
           dispatch(setUsersCommentsSuccess(promise.value.data));
@@ -126,10 +134,11 @@ export const getUserPageData = (userId) => (dispatch) => {
           dispatch(setUsersCommentsSuccess(promise.reason.message));
         }
       }))
-      dispatch(setSameUser(false))
+      dispatch(setFetching(false));
     })
     .catch(err => {
       dispatch(setDataFailure(err.message))
+      dispatch(setFetching(false));
     })
 }
 

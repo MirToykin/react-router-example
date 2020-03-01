@@ -1,13 +1,19 @@
 import React, {useEffect} from "react";
 import UserPage from "./UserPage";
-import {getUserPageData} from "../../redux/userPage-reducer";
+import {getUserPageData, offCommentsVisibility, onCommentsVisibility} from "../../redux/userPage-reducer";
 import {connect} from "react-redux";
 
 const UserPageContainer = (props) => {
   useEffect(() => {
-    props.getUserPageData(props.match.params.userId)
+    if (!Object.keys(props.userPage.user).length) {
+      props.getUserPageData(props.match.params.userId);
+    }
   },[]);
-  return <UserPage/>
+  return Object.keys(props.userPage.user).length ? <UserPage
+    {...props.userPage}
+    showComments={props.onCommentsVisibility}
+    hideComments={props.offCommentsVisibility}
+  /> : <h1>LOADING...</h1>
 }
 
 const mapStateToProps = state => {
@@ -18,7 +24,9 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    getUserPageData: (userId) => dispatch(getUserPageData(userId))
+    getUserPageData: userId => dispatch(getUserPageData(userId)),
+    onCommentsVisibility: postId => dispatch(onCommentsVisibility(postId)),
+    offCommentsVisibility: postId => dispatch(offCommentsVisibility(postId))
   }
 }
 

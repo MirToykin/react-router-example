@@ -1,13 +1,13 @@
 .App {
+  height: 100vh;
+}
+.main-content-wrapper {
   text-align: center;
-  width: 60%;
+  width: 50%;
   margin: auto;
-  background-color: lightslategray;
-  display: flex;
 }
 .main-content {
-  width: 80%;
-  min-height: 700px;
+  min-height: 100%;
 }
 
 .App-logo {

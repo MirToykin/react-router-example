@@ -1,4 +1,17 @@
 .userPage {
+  background-image: linear-gradient(to top, #c4c5c7 0%, #dcdddf 52%, #ebebeb 100%);
+  margin-top: 2em;
+  padding: 0.5em 1.2em;
+  border-radius: 1em;
+  box-shadow: 0 2px 5px #dcdddf;
+}
+.userPageInfo {
   display: flex;
   justify-content: space-between;
+}
+.userPage hr {
+  border-color: #434343;
+}
+.postsTitle {
+  text-align: left;
 }

@@ -5,8 +5,10 @@ import {NavLink} from "react-router-dom";
 const Nav = props => {
   return (
     <nav className={classes.navbar}>
-      <NavLink className={classes.nav_link} activeClassName={classes.active} to='/users'>Users</NavLink>
-      <NavLink className={classes.nav_link} activeClassName={classes.active} to='/photos'>Photos</NavLink>
+      <div className={classes.linkWrapper}>
+        <NavLink className={classes.nav_link} activeClassName={classes.active} to='/users'>Users</NavLink>
+        <NavLink className={classes.nav_link} activeClassName={classes.active} to='/photos'>Photos</NavLink>
+      </div>
     </nav>
   )
 }

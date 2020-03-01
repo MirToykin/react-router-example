@@ -1,16 +1,24 @@
 .navbar {
-  width: 20%;
-  background-color: chocolate;
+  background-image: linear-gradient(to top, #c4c5c7 0%, #dcdddf 52%, #ebebeb 100%);
+}
+.linkWrapper {
+  display: flex;
+  justify-content: space-evenly;
+  width: 50%;
+  margin: auto;
 }
 
-.nav_link {
+.navbar a {
   display: block;
   text-decoration: none;
-  color: #fff;
+  color: #434343;
   height: 2em;
   line-height: 2em;
+  font-size: 1.2em;
+  margin-right: 1em;
 }
 
-.active {
-  background-color: lightslategray;
+.navbar a.active {
+  /*background-color: lightslategray;*/
+  color: #9a9a9a;
 }
