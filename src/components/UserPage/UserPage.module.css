@@ -1,5 +1,6 @@
 .userPage {
-  background-image: linear-gradient(to top, #c4c5c7 0%, #dcdddf 52%, #ebebeb 100%);
+  /*background-image: linear-gradient(to top, #c4c5c7 0%, #dcdddf 52%, #ebebeb 100%);*/
+  background-color: #ebebeb;
   margin-top: 2em;
   padding: 0.5em 1.2em;
   border-radius: 1em;

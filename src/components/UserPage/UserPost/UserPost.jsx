@@ -10,17 +10,19 @@ const UserPost = ({title, body, id, showComments, hideComments, visibleComments,
       {visibleComments.some(postId => postId === id) ?
         <button onClick={() => hideComments(id)} className={classes.changeCommentsVis}>Hide comments</button> :
         <button onClick={() => showComments(id)} className={classes.changeCommentsVis}>Show comments</button>}
-      {visibleComments.some(postId => postId === id) ? usersComments[postIndex].map(comment => {
-        return <>
+      {visibleComments.some(postId => postId === id) ?
+        <div className={classes.comments}>
           <p className={classes.commentTitle}>Comments:</p>
-          <PostComment
-            name={comment.name}
-            body={comment.body}
-            email={comment.email}
-            key={comment.id}
-          />
-        </>
-      }) : null}
+          {usersComments[postIndex].map(comment => {
+            return <PostComment
+              name={comment.name}
+              body={comment.body}
+              email={comment.email}
+              key={comment.id}
+            />
+          })}
+        </div> :
+        null}
     </div>
   )
 }

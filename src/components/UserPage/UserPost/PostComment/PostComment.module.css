@@ -1,0 +1,14 @@
+.comment {
+  font-size: 0.9em;
+  padding: 1em;
+  border-radius: 0.5em;
+  background-image: linear-gradient(to top, #c4c5c7 0%, #dcdddf 52%, #ebebeb 100%);
+  margin-bottom: 1em;
+}
+.title {
+  font-weight: bold;
+}
+.email {
+  margin: 0;
+  text-decoration: underline;
+}

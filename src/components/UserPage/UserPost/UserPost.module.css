@@ -12,6 +12,7 @@
 }
 .commentTitle {
   font-weight: bold;
+  margin-bottom: 0.5em;
 }
 .changeCommentsVis {
   font-weight: normal;
@@ -20,8 +21,13 @@
   background-color: #404040;
   border: none;
   color: #929EAD;
+  border-radius: 4px;
+  margin-bottom: 1em;
 }
 .changeCommentsVis:hover {
   background-color: #353535;
   border: none;
+}
+.comments {
+  padding: 1em 1em 1em 3em;
 }

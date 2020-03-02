@@ -3,7 +3,6 @@ import classes from './UserPage.module.css'
 import UserPost from "./UserPost/UserPost";
 
 const UserPage = props => {
-  debugger
   return (
     <div className={classes.userPage}>
       <div className={classes.userPageInfo}>
@@ -35,7 +34,7 @@ const UserPage = props => {
           hideComments={props.hideComments}
           visibleComments={props.visibleComments}
           usersComments={props.usersComments}
-          postIndex
+          postIndex={postIndex}
         />)}
       </div>
     </div>

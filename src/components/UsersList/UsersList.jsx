@@ -7,7 +7,7 @@ const UsersList = props => {
 
   return (
     <div className={classes.users}>
-      <h1>Users</h1>
+      <h1>USERS</h1>
       {props.isFetching ? <h1>Loading...</h1> : props.users.map(user => <UserItem
         id={user.id}
         name={user.name}
